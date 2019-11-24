@@ -3,7 +3,11 @@ package com.app.psicologia.service;
 import com.app.psicologia.model.document.User;
 import com.app.psicologia.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
