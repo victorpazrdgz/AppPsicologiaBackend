@@ -1,4 +1,4 @@
-package com.app.psicologia.controller;
+package com.app.psicologia.controllers;
 
 
 import com.app.psicologia.model.document.User;
@@ -15,7 +15,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/new", method = RequestMethod.POST, produces = { "application/json" })
     public @ResponseBody User createUser(@RequestBody User user) throws Exception {
-        System.out.println("hola controller");
+        System.out.println("hola controllers");
          System.out.println(user);
         if (user != null) {
 
@@ -26,7 +26,7 @@ public class UserController {
     }
     @RequestMapping(value = "/user/test", method = RequestMethod.POST, produces = { "application/json" })
     public @ResponseBody String test() throws Exception {
-        System.out.println("hola controller");
+        System.out.println("hola controllers");
 
 
         return "hola mundo";
