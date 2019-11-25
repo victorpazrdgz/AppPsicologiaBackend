@@ -1,4 +1,4 @@
-package com.app.psicologia.model.document;
+package com.app.psicologia.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 
-@Document(collection = "user")
+@Document(collection = "users")
 public class User {
 
     @Id
@@ -19,7 +19,7 @@ public class User {
 
     private String name;
 
-    private String lastname;
+    private String lastName;
 
     private byte age;
 
@@ -74,12 +74,12 @@ public class User {
         this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public byte getAge() {

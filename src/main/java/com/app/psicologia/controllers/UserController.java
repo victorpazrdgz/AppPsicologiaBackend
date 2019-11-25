@@ -1,7 +1,7 @@
 package com.app.psicologia.controllers;
 
 
-import com.app.psicologia.model.document.User;
+import com.app.psicologia.model.User;
 import com.app.psicologia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +29,6 @@ public class UserController {
         System.out.println("hola controllers");
 
 
-        return "hola mundo";
+        return "hola mundo origin";
     }
 }

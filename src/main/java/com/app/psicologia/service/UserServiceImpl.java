@@ -1,7 +1,7 @@
 package com.app.psicologia.service;
 
-import com.app.psicologia.model.document.User;
-import com.app.psicologia.model.repository.UserRepository;
+import com.app.psicologia.model.User;
+import com.app.psicologia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-   /* @Override
+    /*@Override
     public User findByUsername(String username) throws Exception {
         User user= userRepository.findByUsername(username);
         return user;

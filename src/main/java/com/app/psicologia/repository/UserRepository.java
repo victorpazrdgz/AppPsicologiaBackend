@@ -1,11 +1,10 @@
-package com.app.psicologia.model.repository;
+package com.app.psicologia.repository;
 
-import com.app.psicologia.model.document.User;
+import com.app.psicologia.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 
-
-public interface UserRepository extends MongoRepository<User, Long> {
+public interface UserRepository extends MongoRepository<User, String> {
 
    // User findByUsername(String userName);
     User findById(Integer id);
