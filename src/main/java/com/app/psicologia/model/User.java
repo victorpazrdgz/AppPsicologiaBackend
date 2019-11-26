@@ -9,8 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "users")
 public class User {
 
+
     @Id
-    private Integer id;
+    private Long id;
 
     @Indexed(unique = true)
     private String userName;
@@ -42,11 +43,11 @@ public class User {
 
     // Getter and Setter
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
