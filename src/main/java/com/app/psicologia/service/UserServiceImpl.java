@@ -54,11 +54,11 @@ public class UserServiceImpl implements UserService {
     public List<User> findUsers() {
         return userRepository.findAll();
     }
-    /*@Override
+    @Override
     public User findByUsername(String username) throws Exception {
-        User user= userRepository.findByUsername(username);
+        User user=userRepository.findByUserName(username);
         return user;
-    }*/
+    }
 
     @Override
     public User findByEmail(String email) throws Exception {

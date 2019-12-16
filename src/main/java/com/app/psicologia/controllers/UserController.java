@@ -6,6 +6,8 @@ import com.app.psicologia.model.JwtRequest;
 import com.app.psicologia.model.User;
 import com.app.psicologia.service.JwtUserDetailsService;
 import com.app.psicologia.service.UserService;
+import com.google.gson.JsonObject;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,10 +40,11 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUserName(), authenticationRequest.getPassword());
-        System.out.println(authenticationRequest.getEmail() + authenticationRequest.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUserName());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(token);
+        JSONObject accessToken= new JSONObject();
+        accessToken.put("token",token);
+        return ResponseEntity.ok(accessToken);
     }
     private void authenticate(String userName, String password) throws Exception {
         try {
@@ -87,5 +90,12 @@ public class UserController {
     public @ResponseBody List<User> listUsers() throws Exception {
         List<User> listUsers = userService.findUsers();
         return listUsers;
+    }
+    @RequestMapping(value = "/user", method = RequestMethod.POST, produces = { "application/json" })
+
+    public @ResponseBody User searchUser(@RequestBody User user) throws Exception {
+
+        user=userService.findByUsername(user.getUserName());
+        return user;
     }
 }

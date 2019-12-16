@@ -3,7 +3,7 @@ package com.app.psicologia.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import org.springframework.data.mongodb.core.mapping.Field;
 
 
 @Document(collection = "users")
@@ -12,7 +12,7 @@ public class User {
 
     @Id
     private Long id;
-
+    @Field(value="userName")
     @Indexed(unique = true)
     private String userName;
 
