@@ -2,11 +2,9 @@ package com.app.psicologia.controllers;
 
 
 import com.app.psicologia.config.JwtTokenUtils;
-import com.app.psicologia.model.JwtRequest;
 import com.app.psicologia.model.User;
 import com.app.psicologia.service.JwtUserDetailsService;
 import com.app.psicologia.service.UserService;
-import com.google.gson.JsonObject;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +13,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -61,10 +60,13 @@ public class UserController {
         System.out.println("hola controllers");
          System.out.println(user);
         if (user != null) {
-            User userCreate = new  User();
+            User userCreate;
             userCreate= user;
             userCreate.setId(userService.getNextSequence("customSequences"));
-
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(user.getPassword());
+            userCreate.setPassword(hashedPassword);
+            userCreate.setRole("USER");
             user = userService.createUser(userCreate);
 
         }
@@ -80,7 +82,7 @@ public class UserController {
         }
         return user;
     }
-    @RequestMapping(value = "/user/{id}/delete", method = RequestMethod.DELETE, produces = { "application/json" })
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE, produces = { "application/json" })
     public @ResponseBody Boolean deleteUser(@PathVariable Long id) throws Exception {
         System.out.println(userService.deleteUser(id));
         return userService.deleteUser(id);

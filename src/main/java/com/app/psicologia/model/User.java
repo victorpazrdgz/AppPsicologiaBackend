@@ -24,7 +24,7 @@ public class User {
 
     private byte age;
 
-    private boolean sex;
+    private String sex;
 
     private String maritalStatus;
 
@@ -91,13 +91,9 @@ public class User {
         this.age = age;
     }
 
-    public boolean isSex() {
-        return sex;
-    }
+    public String getSex() { return sex; }
 
-    public void setSex(boolean sex) {
-        this.sex = sex;
-    }
+    public void setSex(String sex) { this.sex = sex; }
 
     public String getMaritalStatus() {
         return maritalStatus;
