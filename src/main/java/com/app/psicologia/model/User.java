@@ -22,7 +22,7 @@ public class User {
 
     private String lastName;
 
-    private byte age;
+    private int age;
 
     private String sex;
 
@@ -37,9 +37,10 @@ public class User {
     @Indexed(unique = true)
     private String email;
 
-    private byte status;
+    private int status;
 
     private String role;
+
 
     // Getter and Setter
 
@@ -83,7 +84,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public byte getAge() {
+    public int getAge() {
         return age;
     }
 
@@ -135,7 +136,7 @@ public class User {
         this.email = email;
     }
 
-    public byte getStatus() {
+    public int getStatus() {
         return status;
     }
 
