@@ -5,9 +5,9 @@ import com.app.psicologia.model.User;
 import com.app.psicologia.repository.UserRepository;
 
 
-
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 public  class UserServiceImplTest {
 
@@ -33,16 +33,18 @@ public  class UserServiceImplTest {
 
     @Before
     public void setUp() {
-        test = new User();
-        test.setUserName("testUsername");
-        test.setName("name");
-        when(userRepository.findByUserName("testUsername")).thenReturn(test);
+
+
     }
     @Test
     void findByUsername() throws Exception {
         String userName = "testUsername";
+        test = new User();
+        test.setUserName("testUsername");
+        test.setName("name");
+        when(userRepository.findByUserName("testUsername")).thenReturn(test);
         User found = userService.findByUsername(userName);
         System.out.println(found);
-//        assertEquals (found.getUserName(),userName);
+        assertEquals (found.getUserName(),userName);
     }
 }
