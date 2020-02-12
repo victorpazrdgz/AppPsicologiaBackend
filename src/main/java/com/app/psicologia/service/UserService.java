@@ -2,10 +2,11 @@ package com.app.psicologia.service;
 
 
 import com.app.psicologia.model.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+@Service
 public interface UserService {
 
     public User createUser(User user) throws Exception ;
