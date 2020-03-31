@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    container_name: mongodbcontainer
+    ports:
+      - 37017:27017
+    image: mongo
+  spring:
+    container_name: docker-spring
+    networks:
+      - networkMyApp
+    ports:
+      - 9090:8080
+    hostname: spring
+    depends_on:
+      - mongo
+    image:  victorpazr/apppsicologiabackend:1.0.0

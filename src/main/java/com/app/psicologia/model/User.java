@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "users")
 public class User {
 
-
     @Id
     private Long id;
     @Field(value="userName")

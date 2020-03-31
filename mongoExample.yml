@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 37017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=appPsicologia
+    command: mongod --bind_ip_all
+    networks:
+      networkMyApp:
+        ipv4_address: 172.20.0.2
+networks:
+  networkMyApp:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.20.0.0/16"

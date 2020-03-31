@@ -1,0 +1,59 @@
+
+version: '3.7'
+services:
+  springboot:
+    build: .
+    #    restart: always
+    container_name: AppPsicologiaContainer
+    #    hostname: spring
+    #    environment:
+    #      - MONGO_URL=mongodb://172.20.0.2:37017/appPsicologia
+    #      - ROOT_URL=http://172.20.0.3:8080
+    ports:
+      - 8080:8080
+    #    working_dir: /opt/app
+    depends_on:
+      - mongo
+    networks:
+      networkMyApp:
+        ipv4_address: 172.20.0.3
+    links:
+      - mongo
+  nuxtjs:
+    image: victorpazr/apppsicologiafrontend
+    container_name: AppPsicologiaFrontContainer
+    ports:
+     - 3000:3000
+    links:
+     - springboot
+    networks:
+      networkMyApp:
+        ipv4_address: 172.20.0.5
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 37017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=appPsicologia
+    command: mongod --bind_ip_all
+    networks:
+      networkMyApp:
+        ipv4_address: 172.20.0.2
+  initdb:
+    build: ./initDb
+    networks:
+      networkMyApp:
+        ipv4_address: 172.20.0.4
+    links:
+      - mongo
+networks:
+  networkMyApp:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.20.0.0/16"
+
+
+

@@ -1,0 +1,2 @@
+[{"_id": 1,"userName": "adminTest","password": "$2a$10$ANk1Qh8.1Tj3W9A2QaDaneebCPqD9XjPgMYNTXD1Pv3Qea.HiMUJa","age": 0,"sex": "Male","email": "adminTest@user.com", "status": 0, "role": "ADMIN","_class":"com.app.psicologia.model.User"},
+  {"_id": 2,"userName": "userTest","password": "$2a$10$ANk1Qh8.1Tj3W9A2QaDaneebCPqD9XjPgMYNTXD1Pv3Qea.HiMUJa","age": 0,"sex": "Male","email": "userTest@user.com", "status": 0, "role": "USER","_class":"com.app.psicologia.model.User"}]
