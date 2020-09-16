@@ -3,6 +3,7 @@ package com.app.psicologia.controllers;
 import com.app.psicologia.model.QuizTest;
 import com.app.psicologia.model.ResponseTest;
 import com.app.psicologia.model.User;
+import com.app.psicologia.service.EmailServiceImpl;
 import com.app.psicologia.service.QuizTestService;
 import com.app.psicologia.service.ResponseTestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class TestController {
     QuizTestService quizTestService;
     @Autowired
     ResponseTestService responseTestService;
+    @Autowired
+    EmailServiceImpl emailService;
 
     @RequestMapping(value = "/test/new", method = RequestMethod.POST, produces = { "application/json" })
     private boolean newTest (@RequestBody QuizTest test) throws Exception{
@@ -38,6 +41,16 @@ public class TestController {
                 System.out.println(test.getQuestions().get(i).getOptions().get(j).getOption());
         }
         return isCreateTest;
+    }
+
+    @RequestMapping(value = "/test/update", method = RequestMethod.PUT, produces = { "application/json" })
+    public @ResponseBody QuizTest updateTest(@RequestBody QuizTest test) throws Exception {
+        if (test != null) {
+            System.out.println("update test");
+            quizTestService.updateTest(test);
+
+        }
+        return test;
     }
 
     @RequestMapping(value = "/test/response", method = RequestMethod.POST, produces = { "application/json" })

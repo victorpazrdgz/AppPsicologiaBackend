@@ -33,7 +33,8 @@ public class QuizTestServiceImpl implements QuizTestService {
 
     @Override
     public QuizTest updateTest(QuizTest test) throws Exception {
-        return null;
+        quizTestRepository.save(test);
+        return test;
     }
 
     @Override

@@ -23,31 +23,24 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(s);
-        
-        if(user == null) {
-            throw new UsernameNotFoundException(String.format("The username %s doesn't exist", s));
+        try {
+            User user = userRepository.findByEmailOrUserName(s);
+
+            if (user == null) {
+                throw new UsernameNotFoundException(String.format("The username %s doesn't exist", s));
+            }
+
+            List<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(user.getRole()));
+
+            UserDetails userDetails = new org.springframework.security.core.userdetails.
+                    User(user.getUserName(), user.getPassword(), authorities);
+
+            return userDetails;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
-     // if (user.getStatus() != 2) {
-       List<GrantedAuthority> authorities = new ArrayList<>();
-       
-           authorities.add(new SimpleGrantedAuthority(user.getRole()));
-          
-        //GrantedAuthority authorities= new SimpleGrantedAuthority(user.getRole().getRole());
-        
-        UserDetails userDetails = new org.springframework.security.core.userdetails.
-                User(user.getUserName() , user.getPassword(), authorities);
 
-        return userDetails ;
-     /* } else {
-          try {
-              throw new  IllegalAccessException("blocked");
-          } catch (IllegalAccessException e) {
-              e.printStackTrace();
-          }
-      }
-
-
-        return null;*/
     }
 }

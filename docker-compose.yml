@@ -38,6 +38,8 @@ services:
     environment:
       - MONGO_INITDB_DATABASE=appPsicologia
     command: mongod --bind_ip_all
+    volumes:
+      - ./mongo-volume:/data/db
     networks:
       networkMyApp:
         ipv4_address: 172.20.0.2

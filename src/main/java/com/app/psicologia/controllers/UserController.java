@@ -3,6 +3,7 @@ package com.app.psicologia.controllers;
 
 import com.app.psicologia.config.JwtTokenUtils;
 import com.app.psicologia.model.User;
+import com.app.psicologia.service.EmailService;
 import com.app.psicologia.service.JwtUserDetailsService;
 import com.app.psicologia.service.UserService;
 import net.minidev.json.JSONObject;
@@ -36,6 +37,9 @@ public class UserController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
+    @Autowired
+    EmailService emailService;
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUserName(), authenticationRequest.getPassword());
@@ -57,8 +61,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/new", method = RequestMethod.POST, produces = { "application/json" })
     public @ResponseBody User createUser(@RequestBody User user) throws Exception {
-        System.out.println("hola controllers");
-         System.out.println(user);
+        String subject = "Confirm Resgistration";
         if (user != null) {
             User userCreate;
             userCreate= user;
@@ -68,6 +71,7 @@ public class UserController {
             userCreate.setPassword(hashedPassword);
             userCreate.setRole("USER");
             user = userService.createUser(userCreate);
+            emailService.sendEmailWithAttachment(user.getEmail(),subject,"icon.png","src/main/resources/templates/userConfirmation.html");
 
         }
         return user;
