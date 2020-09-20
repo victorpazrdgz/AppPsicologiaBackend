@@ -46,7 +46,7 @@ public class TestController {
     @RequestMapping(value = "/test/update", method = RequestMethod.PUT, produces = { "application/json" })
     public @ResponseBody QuizTest updateTest(@RequestBody QuizTest test) throws Exception {
         if (test != null) {
-            System.out.println("update test");
+            System.out.println("update test"+ test.getQuestions());
             quizTestService.updateTest(test);
 
         }
@@ -59,8 +59,8 @@ public class TestController {
         ResponseTest saveResponses = responses;
         saveResponses.setId(responseTestService.getNextSequence("customSequences"));
         try {
-            responseTestService.saveResponses(saveResponses);
-             isSaveResponses = true;
+
+             isSaveResponses = responseTestService.saveResponses(saveResponses);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -71,5 +71,23 @@ public class TestController {
     List<QuizTest> listTests() throws Exception {
         List<QuizTest> listTest = quizTestService.findTests();
         return listTest;
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = { "application/json" })
+    public @ResponseBody
+    Boolean deleteTest(@RequestBody QuizTest test) throws Exception {
+        return quizTestService.deleteTest(test.getId()) ;
+    }
+
+    @RequestMapping(value = "/responses", method = RequestMethod.GET, produces = { "application/json" })
+    public @ResponseBody
+    List<ResponseTest> listTestsResponse() throws Exception {
+    System.out.println(responseTestService.findAllResponses());
+        return responseTestService.findAllResponses();
+    }
+    @RequestMapping(value = "/responses/testName", method = RequestMethod.GET, produces = { "application/json" })
+    public @ResponseBody
+    List<ResponseTest> listTestsResponse(@RequestParam String testName) throws Exception {
+        return responseTestService.findByTestName(testName);
     }
 }

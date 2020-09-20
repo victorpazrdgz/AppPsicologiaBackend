@@ -86,10 +86,10 @@ public class UserController {
         }
         return user;
     }
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE, produces = { "application/json" })
-    public @ResponseBody Boolean deleteUser(@PathVariable Long id) throws Exception {
-        System.out.println(userService.deleteUser(id));
-        return userService.deleteUser(id);
+    @RequestMapping(value = "/user/delete", method = RequestMethod.DELETE, produces = { "application/json" })
+    public @ResponseBody Boolean deleteUser(@RequestBody User user) throws Exception {
+        System.out.println("id"+user.getId());
+        return userService.deleteUser(user.getId());
     }
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = { "application/json" })
 
@@ -104,4 +104,5 @@ public class UserController {
         user=userService.findByUsername(user.getUserName());
         return user;
     }
+
 }

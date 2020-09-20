@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
@@ -35,5 +37,15 @@ public class ResponseTesServiceImpl implements ResponseTestService {
                 options().returnNew(true).upsert(true),
                 CustomSequences.class);
         return counter.getSeq();
+    }
+
+    @Override
+    public List<ResponseTest> findAllResponses() throws Exception {
+        return responseTestRepository.findAll();
+    }
+
+    @Override
+    public List<ResponseTest> findByTestName(String testName) throws Exception {
+        return responseTestRepository.findByTestName(testName);
     }
 }

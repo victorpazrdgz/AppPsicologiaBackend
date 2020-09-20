@@ -39,7 +39,11 @@ public class QuizTestServiceImpl implements QuizTestService {
 
     @Override
     public Boolean deleteTest(Long id) throws Exception {
-        return null;
+        if(quizTestRepository.findById(id) != null) {
+            quizTestRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     @Override
