@@ -1,9 +1,15 @@
 package com.app.psicologia.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 @Document(collection = "users")
@@ -40,6 +46,11 @@ public class User {
 
     private String role;
 
+    @Getter@Setter
+    private List<Studio> assignedStudios =new ArrayList<Studio>();
+
+    @Getter @Setter
+    private Date lastLogin;
 
     // Getter and Setter
 

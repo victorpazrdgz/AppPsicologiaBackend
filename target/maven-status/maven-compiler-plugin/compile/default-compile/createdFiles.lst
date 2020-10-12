@@ -1,5 +1,7 @@
 com\app\psicologia\config\JwtTokenUtils.class
 com\app\psicologia\repository\QuizTestRepository.class
+com\app\psicologia\model\Studio.class
+com\app\psicologia\controllers\StudioController.class
 com\app\psicologia\model\ResponseTest.class
 com\app\psicologia\model\Option.class
 com\app\psicologia\service\UserService.class
@@ -16,12 +18,15 @@ com\app\psicologia\model\User.class
 com\app\psicologia\service\EmailService.class
 com\app\psicologia\controllers\UserController.class
 com\app\psicologia\service\EmailServiceImpl.class
+com\app\psicologia\service\StudioService.class
 com\app\psicologia\model\Response.class
 com\app\psicologia\model\QuizTest.class
 com\app\psicologia\repository\UserRepository.class
 com\app\psicologia\config\WebSecurityConfig.class
+com\app\psicologia\service\StudioServiceImpl.class
 com\app\psicologia\config\JwtAuthEntryPoint.class
 com\app\psicologia\PsicologiaApplication.class
 com\app\psicologia\repository\ResponseTestRepository.class
 com\app\psicologia\service\ResponseTesServiceImpl.class
 com\app\psicologia\model\CustomSequences.class
+com\app\psicologia\repository\StudioRepository.class

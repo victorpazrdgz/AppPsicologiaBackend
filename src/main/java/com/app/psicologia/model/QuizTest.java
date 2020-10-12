@@ -11,7 +11,7 @@ import java.util.List;
 public class QuizTest {
     @Id
     private Long id;
-    @Indexed(unique = true)
+//    @Indexed(unique = true)
     private String testName;
 
     private List<Question> questions = new ArrayList<Question>();

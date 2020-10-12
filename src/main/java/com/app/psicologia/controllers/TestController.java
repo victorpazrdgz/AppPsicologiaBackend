@@ -9,6 +9,7 @@ import com.app.psicologia.service.ResponseTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -59,7 +60,6 @@ public class TestController {
         ResponseTest saveResponses = responses;
         saveResponses.setId(responseTestService.getNextSequence("customSequences"));
         try {
-
              isSaveResponses = responseTestService.saveResponses(saveResponses);
         }catch (Exception e){
             e.printStackTrace();

@@ -35,9 +35,9 @@ public class EmailServiceImpl implements EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
         helper.setTo(to);
         helper.setSubject(subject);
-        helper.setText(text + "<img  src='cid:icon' />", true);
-        helper.addInline("icon", new File("src/main/resources/icon.png"));
-        helper.addAttachment("logo.png", new ClassPathResource(pathToAttachment));
+//        helper.setText(text + "<img  src='cid:icon' />", true);
+//        helper.addInline("icon", new File("src/main/resources/icon.png"));
+//        helper.addAttachment("logo.png", new ClassPathResource(pathToAttachment));
         emailSender.send(msg);
 
     }

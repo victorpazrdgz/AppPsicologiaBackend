@@ -1,9 +1,12 @@
 package com.app.psicologia.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Document(collection = "responseTests")
@@ -12,6 +15,10 @@ public class ResponseTest {
     private Long id;
     private String testName;
     private String userName;
+    @Getter@Setter
+    private Date didTest;
+    @Getter@Setter
+    private String studio;
     private List<Response> responses = new ArrayList<Response>();
 
     public Long getId() {

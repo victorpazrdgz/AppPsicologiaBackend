@@ -8,6 +8,7 @@ import com.app.psicologia.service.JwtUserDetailsService;
 import com.app.psicologia.service.UserService;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,10 +42,18 @@ public class UserController {
     @Autowired
     EmailService emailService;
 
+    @Value("${pass}")
+    public String passReset;
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody User authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUserName(), authenticationRequest.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUserName());
+        User user = userService.findByUsername(userDetails.getUsername());
+        if (user.getLastLogin()!=null) {
+            user.setLastLogin(new Date());
+            userService.updateUser(user);
+        }
         final String token = jwtTokenUtil.generateToken(userDetails);
         JSONObject accessToken= new JSONObject();
         accessToken.put("token",token);
@@ -70,8 +80,9 @@ public class UserController {
             String hashedPassword = passwordEncoder.encode(user.getPassword());
             userCreate.setPassword(hashedPassword);
             userCreate.setRole("USER");
+            userCreate.setLastLogin(new Date());
             user = userService.createUser(userCreate);
-            emailService.sendEmailWithAttachment(user.getEmail(),subject,"icon.png","src/main/resources/templates/userConfirmation.html");
+            emailService.sendSimpleMessage(user.getEmail(),subject,"Your are Registered");
 
         }
         return user;
@@ -102,6 +113,41 @@ public class UserController {
     public @ResponseBody User searchUser(@RequestBody User user) throws Exception {
 
         user=userService.findByUsername(user.getUserName());
+        return user;
+    }
+    @RequestMapping(value = "/resetPassword", method = RequestMethod.GET, produces = { "application/json" })
+    public @ResponseBody
+    Boolean resetPassword(@RequestParam String userName) throws Exception{
+        String subject = "Change Password";
+        User user = userService.findByUsername(userName);
+        if (user !=null) {
+            user.setLastLogin(null);
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(passReset);
+            user.setPassword(hashedPassword);
+            userService.updateUser(user);
+            emailService.sendSimpleMessage(user.getEmail(),subject,"Your new Password is :" + passReset);
+            return true;
+        }
+        return false;
+    }
+    @RequestMapping(value = "/changePassword", method = RequestMethod.GET, produces = { "application/json" })
+    public @ResponseBody
+    User changePassword(@RequestParam String username, @RequestParam String oldpassword, @RequestParam String password) throws Exception {
+        System.out.println("sector"+username);
+        System.out.println("sector"+oldpassword);
+        User user=userService.findByUsername(username);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//       String hashedPassword = passwordEncoder.hashCode(oldpassword);
+        System.out.println(user.getPassword());
+        System.out.println(passwordEncoder.matches(oldpassword,user.getPassword()));
+        if(passwordEncoder.matches(oldpassword,user.getPassword())== true) {
+            System.out.println(user.getPassword());
+            String hashedPassword= passwordEncoder.encode(password);
+            user.setLastLogin(new Date());
+            user.setPassword(hashedPassword);
+            userService.updateUser(user);
+        }
         return user;
     }
 

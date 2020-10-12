@@ -6,8 +6,11 @@ E:\ProyectosMaster\src\main\java\com\app\psicologia\service\EmailServiceImpl.jav
 E:\ProyectosMaster\src\main\java\com\app\psicologia\service\UserServiceImpl.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\controllers\UserController.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\model\User.java
+E:\ProyectosMaster\src\main\java\com\app\psicologia\repository\StudioRepository.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\config\JwtAuthEntryPoint.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\repository\UserRepository.java
+E:\ProyectosMaster\src\main\java\com\app\psicologia\service\StudioServiceImpl.java
+E:\ProyectosMaster\src\main\java\com\app\psicologia\service\StudioService.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\service\UserService.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\config\JwtRequestFilter.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\service\QuizTestService.java
@@ -20,8 +23,10 @@ E:\ProyectosMaster\src\main\java\com\app\psicologia\model\Question.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\service\EmailService.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\model\Response.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\service\JwtUserDetailsService.java
+E:\ProyectosMaster\src\main\java\com\app\psicologia\controllers\StudioController.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\service\QuizTestServiceImpl.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\service\ResponseTesServiceImpl.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\config\WebSecurityConfig.java
+E:\ProyectosMaster\src\main\java\com\app\psicologia\model\Studio.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\config\JwtTokenUtils.java
 E:\ProyectosMaster\src\main\java\com\app\psicologia\model\CustomSequences.java
